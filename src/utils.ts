@@ -16,11 +16,12 @@ export interface IParsedName {
 }
 
 export const parseName = (name: string): IParsedName => {
-  const bracketPosition = name.indexOf('[')
+  const decodedName = decodeURIComponent(name)
+  const bracketPosition = decodedName.indexOf('[')
   const hasBrackets = bracketPosition !== -1
 
   return {
     hasBrackets,
-    name: hasBrackets ? name.slice(0, bracketPosition) : name
+    name: hasBrackets ? decodedName.slice(0, bracketPosition) : decodedName
   }
 }
